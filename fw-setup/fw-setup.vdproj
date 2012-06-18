@@ -21,13 +21,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CAD0612F690B4693BF688583E4210AAE"
+        "MsmKey" = "8:_71101A0F938A4F25B37B690BBD8E105D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_EF9AD92C8D7F4376933DEEB0F0DE5AE8"
+        "MsmKey" = "8:_CAD0612F690B4693BF688583E4210AAE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -128,10 +128,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CAD0612F690B4693BF688583E4210AAE"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_71101A0F938A4F25B37B690BBD8E105D"
             {
-            "SourcePath" = "8:..\\drum-minim-graf\\Manual.pdf"
-            "TargetName" = "8:Manual.pdf"
+            "SourcePath" = "8:..\\drum-minim-graf\\icon.ico"
+            "TargetName" = "8:icon.ico"
             "Tag" = "8:"
             "Folder" = "8:_AD76764239534FE78EBE011522DAA3F9"
             "Condition" = "8:"
@@ -148,10 +148,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EF9AD92C8D7F4376933DEEB0F0DE5AE8"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CAD0612F690B4693BF688583E4210AAE"
             {
-            "SourcePath" = "8:..\\drum-minim-graf\\icon.ico"
-            "TargetName" = "8:icon.ico"
+            "SourcePath" = "8:..\\drum-minim-graf\\Manual.pdf"
+            "TargetName" = "8:Manual.pdf"
             "Tag" = "8:"
             "Folder" = "8:_AD76764239534FE78EBE011522DAA3F9"
             "Condition" = "8:"
@@ -356,7 +356,7 @@
             "Target" = "8:_041BFF4B7EE149E0A0832670A5CE1CC6"
             "Folder" = "8:_0E2FAF39F5B14954B2370E1A2128C004"
             "WorkingFolder" = "8:_AD76764239534FE78EBE011522DAA3F9"
-            "Icon" = "8:_EF9AD92C8D7F4376933DEEB0F0DE5AE8"
+            "Icon" = "8:_71101A0F938A4F25B37B690BBD8E105D"
             "Feature" = "8:"
             }
         }
