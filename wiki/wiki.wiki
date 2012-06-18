@@ -1,0 +1,40 @@
+#summary One-sentence summary of this page.
+
+= Introducere =
+
+Acest algoritm determina drumurile de valoare minima dintre toate perechile de varfuri ale unui graf orientat G=(V,E) valorizat. Nu se inpun restrictii ale arcelor, ci doar a structurii grafului. Graful nu trebuie sa contina cicluri cu cost negativ. Algoritmul este in categoria algoritmilor de programare dinamica. Dupa o singura executie a algoritmului vor fi calculate toate drumurile minime dintre toate perechile de noduri.
+<br />
+
+= Construirea matricilor =
+
+== Matricea drumurilor optime ==
+
+d,,i,,,,j,, ia valoarea:
+  * d(v,,i,,,v,,j,,), daca (v,,i,,,v,,j,,) ∈ E si i!=j
+  * 0, daca i=j
+  * ∞, in rest
+
+== Matricea predecesorilor ==
+
+p,,i,,,,j,, ia valoarea:
+  * ∅, daca i=j sau v,,i,,,,j,,=∞
+  * i, daca i!=j si v,,i,,,,j,,<∞
+<br />
+
+= Cod =
+{{{
+for(k=1; k<=n; k++)
+   for(i=1; i<=n; i++)
+      for(j=1; j<=n; j++)
+         if(d[i][j]>d[i][k]+d[k][j]
+         {
+            d[i][j]=d[i][k]+d[k][j];
+            p[i][j]=p[k][j];
+         }
+}}}
+<br />
+
+= Complexitate =
+|| *Cel mai rau caz* || Timp || *O(|V|^3^)* ||
+|| *Cel mai bun caz* || Timp || *Ω(|V|^3^)* ||
+|| *Cel mai rau caz* || Memorie || *Θ(|V|^2^)* ||
