@@ -79,7 +79,7 @@ BOOL CALLBACK TrasDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				case IDOK:
 					GetDlgItemText(hwnd,IDC_EDIT,cost,5);
 					n=atoi(cost);
-					if(n<-99 || n>99)
+					if(n<-99 || n>99 || (n==0 && strcmp(cost,"0")!=0))
 					{
 						MessageBox(hwnd, "Costul muchiei este incorect!", "Eroare", MB_OK | MB_ICONINFORMATION);
 						EndDialog(hwnd,IDCANCEL);
