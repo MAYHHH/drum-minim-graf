@@ -119,6 +119,148 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			EnableWindow( GetDlgItem( hwnd, ID_BUTTON_INITIAL ), FALSE);
 		break;
 
+		case WM_COMMAND:
+			switch(LOWORD(wParam))
+			{
+				case ID_MENIU_EXEMPLU:
+					reset(c);
+					EnableWindow( GetDlgItem( hwnd, ID_BUTTON_DRUM ), TRUE);
+					EnableWindow( GetDlgItem( hwnd, ID_BUTTON_INITIAL ), FALSE);
+					nod[1].x=220;
+					nod[1].y=60;
+					creare_nod(1,0);
+					nod[2].x=380;
+					nod[2].y=160;
+					creare_nod(2,0);
+					nod[3].x=290;
+					nod[3].y=260;
+					creare_nod(3,0);
+					nod[4].x=150;
+					nod[4].y=260;
+					creare_nod(4,0);
+					nod[5].x=60;
+					nod[5].y=160;
+					creare_nod(5,0);
+					c=6;
+					
+					mdo[1][5]=init_mdo[1][5]=-35;
+					mp[1][5]=init_mp[1][5]=1;
+					mdo[5][1]=init_mdo[5][1]=INF;
+					mp[5][1]=init_mp[5][1]=0;
+					traseaza_muchie(1,5,0);
+
+					mdo[2][1]=init_mdo[2][1]=19;
+					mp[2][1]=init_mp[2][1]=2;
+					mdo[1][2]=init_mdo[1][2]=INF;
+					mp[1][2]=init_mp[1][2]=0;
+					traseaza_muchie(2,1,0);
+
+					mdo[2][5]=mdo[5][2]=init_mdo[2][5]=init_mdo[5][2]=50;
+					mp[2][5]=init_mp[2][5]=2;
+					mp[5][2]=init_mp[5][2]=5;
+					traseaza_muchie(2,5,0);
+
+					mdo[2][4]=init_mdo[2][4]=42;
+					mp[2][4]=init_mp[2][4]=2;
+					mdo[4][2]=init_mdo[4][2]=INF;
+					mp[4][2]=init_mp[4][2]=0;
+					traseaza_muchie(2,4,0);
+
+					mdo[3][2]=init_mdo[3][2]=-67;
+					mp[3][2]=init_mp[3][2]=3;
+					mdo[2][3]=init_mdo[2][3]=INF;
+					mp[2][3]=init_mp[2][3]=0;
+					traseaza_muchie(3,2,0);
+
+					mdo[4][3]=init_mdo[4][3]=25;
+					mp[4][3]=init_mp[4][3]=4;
+					mdo[3][4]=init_mdo[3][4]=INF;
+					mp[3][4]=init_mp[3][4]=0;
+					traseaza_muchie(4,3,0);
+
+					mdo[4][5]=init_mdo[4][5]=-20;
+					mp[4][5]=init_mp[4][5]=4;
+					mdo[5][4]=init_mdo[5][4]=INF;
+					mp[5][4]=init_mp[5][4]=0;
+					traseaza_muchie(4,5,0);
+
+					creare_tabel(c-1);
+					completare_mdo(c-1);
+					completare_mp(c-1);
+					UpdateWindow(hWND);
+				break;
+
+				case ID_MENIU_EXIT:
+					DestroyWindow(hwnd);
+				break;
+
+				case ID_AJUTOR_MANUAL:
+					ShellExecute(GetDesktopWindow(), "open", "Manual.pdf", NULL, NULL, SW_SHOWNORMAL);
+				break;
+
+				case ID_AJUTOR_DESPRE:
+					flag = DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DESPRE), hwnd, DespreDlgProc);
+				break;
+
+				case ID_BUTTON_DRUM:
+					if(Start==0 || End==0)
+					{
+						MessageBox(hwnd, "Nu ai selectat cele doua noduri!", "Noduri", MB_OK | MB_ICONINFORMATION);
+						break;
+					}
+					if(c==1) break;
+					for(i=1; i<c; i++)
+						for(j=1; j<c; j++)
+						{
+							init_mdo[i][j]=mdo[i][j];
+							init_mp[i][j]=mp[i][j];
+						}
+					run=true;
+					EnableWindow( GetDlgItem( hwnd, ID_BUTTON_INITIAL ), TRUE);
+					EnableWindow( GetDlgItem( hwnd, ID_BUTTON_DRUM ), FALSE);
+					floyd_warshall(c-1);
+				break;
+
+				case ID_BUTTON_INITIAL:
+					if(c==1) break;
+					for(i=1; i<c; i++) if(p[i]) creare_nod(i,0);
+					for(i=1; i<c; i++)
+						for(j=1; j<c; j++)
+						{
+							mdo[i][j]=init_mdo[i][j];
+							mp[i][j]=init_mp[i][j];
+							if(mdo[i][j]>-INF && mdo[i][j]<INF && mdo[i][j]!=0)
+								traseaza_muchie(i,j,0);
+						}
+					creare_tabel(c-1);
+					completare_mdo(c-1);
+					completare_mp(c-1);
+					if(Start) creare_nod(Start,0);
+					if(End) creare_nod(End,0);
+					Start=End=0;
+					run=false;
+					EnableWindow( GetDlgItem( hwnd, ID_BUTTON_DRUM ), TRUE);
+					EnableWindow( GetDlgItem( hwnd, ID_BUTTON_INITIAL ), FALSE);
+				break;
+
+				case ID_BUTTON_NOU:
+					reset(c);
+					EnableWindow( GetDlgItem( hwnd, ID_BUTTON_DRUM ), TRUE);
+					EnableWindow( GetDlgItem( hwnd, ID_BUTTON_INITIAL ), FALSE);
+				break;
+
+				default:
+					break;
+			}
+		break;
+
+		case WM_PAINT:
+			hDC = BeginPaint(hwnd, &Ps);
+			Rectangle(hDC, 20, 20, 420, 300);
+			Rectangle(hDC, 20, 310, 420, 341);
+			EndPaint(hwnd, &Ps);
+		break;
+
 		case WM_RBUTTONDOWN:
 			if(run==true) break;
 			flag=1;
